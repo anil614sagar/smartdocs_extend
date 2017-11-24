@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * Handles installation of SmartDocs Extend database schema.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function smartdocs_extend_schema() {
+  $schema['smartdocs_raw'] = array(
+    'description' => 'Stores OpenAPI Spec Json Locally.',
+    'fields' => array(
+      'uuid' => array(
+        'description' => 'SmartDocs Model UUID',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'raw_spec' => array(
+        'description' => 'OpenAPI Spec raw json format',
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+      ),
+      'spec_format' => array(
+        'description' => 'SmartDocs Uploaded Spec Format',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('uuid'),
+  );
+
+  $schema['smartdocs_raw_revisions'] = array(
+    'description' => 'Stores OpenAPI Spec Json Locally.',
+    'fields' => array(
+      'uuid' => array(
+        'description' => 'SmartDocs Model UUID',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'raw_spec' => array(
+        'description' => 'OpenAPI Spec raw json format',
+        'type' => 'blob',
+        'not null' => FALSE,
+        'size' => 'big',
+      ),
+      'spec_format' => array(
+        'description' => 'SmartDocs Uploaded Spec Format',
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => FALSE,
+      ),
+      'revision' => array(
+        'description' => 'SmartDocs Revision Number',
+        'type' => 'int',
+        'not null' => FALSE,
+      ),
+    ),
+    'primary key' => array('uuid', 'revision'),
+  );
+  return $schema;
+}

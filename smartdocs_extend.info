@@ -1,0 +1,7 @@
+name = Smartdocs Extension
+description = Store spec locally & Extend SmartDocs UI
+core = 7.x
+package = Smartdocs Custom
+version = "7.x-1.0"
+
+stylesheets[all][] = css/smartdocs_extend.css
