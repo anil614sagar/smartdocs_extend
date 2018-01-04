@@ -88,16 +88,16 @@ function smartdocs_extend_node_view($node, $view_mode, $langcode) {
 function smartdocs_extend_js_alter(&$javascript) {
   $version = variable_get('smartdocs_local_asset_version', '6');
   $path = drupal_get_path('module', 'smartdocs');
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['data'] =  drupal_get_path('module', 'smartdocs_extend') . "/js/model.js";
-  // Add other keys also to remove undefined index warnings.
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['scope'] =  'header';
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['group'] =  JS_DEFAULT;
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['weight'] =  9999;
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['every_page'] = TRUE;
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['type'] = 'file';
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['preprocess'] = TRUE;
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['defer'] = TRUE;
-  $javascript[$path . '/local/js/v' . $version . '/model.js']['cache'] = TRUE;
-  // Swap out jQuery to use an updated version of the library.
-
+  // Add model js for smartdocs.
+  $javascript[$path . '/local/js/v' . $version . '/model.js'] = array(
+    'data' => drupal_get_path('module', 'smartdocs_extend') . '/js/model.js',
+    'scope' => 'header',
+    'group' => JS_DEFAULT,
+    'weight' => 9999,
+    'every_page' => TRUE,
+    'type' => 'file',
+    'preprocess' => TRUE,
+    'defer' => TRUE,
+    'cache' => TRUE,
+  );
 }
