@@ -22,6 +22,29 @@ function smartdocs_extend_form_smartdocs_revision_detail_alter(&$form, &$form_st
 }
 
 function smartdocs_extend_smartdocs_model_import($raw_source, $mime_type, $document_format, Apigee\SmartDocs\Model $model, $source) {
+  // Convert YAML to JSON.
+  if ($mime_type == "application/yaml") {
+    require_once libraries_get_path('spyc') . '/Spyc.php';
+    try {
+      $swagger_obj = spyc_load($raw_source);
+    }
+    catch (Exception $e) {
+      // Spyc may throw "Too many keys" exception in edge cases where it
+      // fails to parse valid well-formed YAML. This occurs when an object
+      // or array is written in "short syntax" and spans more than one line.
+      // See https://github.com/mustangostang/spyc/issues/30
+      // This same bug also afflicts Symfony\Yaml, though PECL yaml reads
+      // the data correctly (using libyaml).
+      watchdog_exception('smartdocs', $e);
+      drupal_set_message(t('Warning: If your model contains parameter enums, they may not have imported correctly.'), 'warning');
+    }
+
+    if ($swagger_obj) {
+      $raw_source = json_encode($swagger_obj);
+      $mime_type = "application/json";
+    }
+  }
+
   // If JSON - Store locally
   if ($mime_type == "application/json") {
     $uuid = (string) $model->getUuid();
