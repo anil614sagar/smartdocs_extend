@@ -15,7 +15,7 @@ function smartdocs_extend_schema() {
         'description' => 'SmartDocs Model UUID',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => FALSE,
+        'not null' => TRUE,
       ),
       'raw_spec' => array(
         'description' => 'OpenAPI Spec raw json format',
@@ -40,7 +40,7 @@ function smartdocs_extend_schema() {
         'description' => 'SmartDocs Model UUID',
         'type' => 'varchar',
         'length' => '255',
-        'not null' => FALSE,
+        'not null' => TRUE,
       ),
       'raw_spec' => array(
         'description' => 'OpenAPI Spec raw json format',
@@ -57,7 +57,7 @@ function smartdocs_extend_schema() {
       'revision' => array(
         'description' => 'SmartDocs Revision Number',
         'type' => 'int',
-        'not null' => FALSE,
+        'not null' => TRUE,
       ),
     ),
     'primary key' => array('uuid', 'revision'),

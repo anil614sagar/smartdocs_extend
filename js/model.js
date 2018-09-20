@@ -448,7 +448,7 @@ Apigee.APIModel.Methods = function() {
     //Fix for extraneous space in the resource URL.
     var resourceURLString = "";
     jQuery("[data-role='method_url_container'] span").each(function() {
-      resourceURLString += '<span data-role="'+ jQuery(this).attr('data-role') + '">' + jQuery(this).html() + '</span>';
+      resourceURLString += '<span data-role="'+ Drupal.checkPlain(jQuery(this).attr('data-role')) + '">' + jQuery(this).html() + '</span>';
     });
     jQuery("[data-role='method_url_container']").html(resourceURLString);
     // Template parameter related changes.
