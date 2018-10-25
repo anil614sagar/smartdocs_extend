@@ -1,5 +1,12 @@
 <?php
+/**
+ * @file
+ * Extend and improve fuctionality of SmartDocs module.
+ */
 
+/**
+ * Implements hook_menu().
+ */
 function smartdocs_extend_menu() {
   $items['admin/content/smartdocs/models/%smartdocs_model/download-original/%smartdocs_revision'] = array(
     'title' => 'Download Original',
@@ -12,15 +19,21 @@ function smartdocs_extend_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
 function smartdocs_extend_form_smartdocs_revision_detail_alter(&$form, &$form_state, $form_id) {
   $form['verbose'] = array(
     '#prefix' => "<div>",
-    '#markup' => "<br>" . l('Download Original Spec', 'admin/content/smartdocs/models/'. arg(4) . '/download-original/' . arg(6), array('attributes' => array('class' => array('button', 'spec-download-link')))),
+    '#markup' => "<br>" . l(t('Download Original Spec'), 'admin/content/smartdocs/models/'. arg(4) . '/download-original/' . arg(6), array('attributes' => array('class' => array('button', 'spec-download-link')))),
     '#suffix' => "<br><br></div>",
     '#weight' => 900
   );
 }
 
+/**
+ * Implements hook_smartdocs_model_import().
+ */
 function smartdocs_extend_smartdocs_model_import($raw_source, $mime_type, $document_format, Apigee\SmartDocs\Model $model, $source) {
   // Convert YAML to JSON.
   if ($mime_type == "application/yaml") {
@@ -67,7 +80,9 @@ function smartdocs_extend_smartdocs_model_import($raw_source, $mime_type, $docum
   }
 }
 
-
+/**
+ * Implements hook_node_view().
+ */
 function smartdocs_extend_node_view($node, $view_mode, $langcode) {
   if ($node->type == 'smart_method' && $view_mode == 'full') {
     $model_name = db_select('smartdata', 's')
@@ -107,7 +122,9 @@ function smartdocs_extend_node_view($node, $view_mode, $langcode) {
   }
 }
 
-
+/**
+ * Implements hook_js_alter().
+ */
 function smartdocs_extend_js_alter(&$javascript) {
   $version = variable_get('smartdocs_local_asset_version', '6');
   $path = drupal_get_path('module', 'smartdocs');
