@@ -2,7 +2,7 @@
 Apigee Drupal Developer Portal SmartDocs Extension Module which fixes critical issues with smartdocs.
 
 
-#Installation Instructions
+# Installation Instructions
 
 * Download the entire folder as zip files
 * Extract the zip file in sites/all/modules/custom directory inside your Drupal Root.
@@ -30,6 +30,6 @@ Apigee Drupal Developer Portal SmartDocs Extension Module which fixes critical i
 ## Have a Question / Feedback ?
 
 https://community.apigee.com
-
 https://community.apigee.com/articles/49980/smartdocs-alternative-to-swagger-ui-great-features.html
-    
+https://community.apigee.com/articles/50017/smartdocs-a-custom-module-to-your-rescue-fix-for-c.html
+
